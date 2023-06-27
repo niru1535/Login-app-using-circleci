@@ -1,0 +1,26 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Routes
+app.get('/', (req, res) => {
+  res.send('Welcome to the login application!');
+});
+
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  // Check username and password
+  // Implement your login logic here
+  // ...
+  if (username === 'admin' && password === 'password') {
+    res.send('Login successful!');
+  } else {
+    res.send('Invalid credentials!');
+  }
+});
+
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
