@@ -1,0 +1,22 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.7
+      - run:
+          name: Build Docker image
+          command: |
+            docker build -t my-login-app .
+      - run:
+          name: Run application
+          command: |
+            docker run -d -p 3000:3000 my-login-app
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
